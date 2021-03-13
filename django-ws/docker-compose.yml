@@ -1,0 +1,19 @@
+version: "3.9"
+   
+services:
+  web:
+    build: .
+    container_name: django-ws
+    command: python /srv/django-ws/bk_server/manage.py runserver 0.0.0.0:8000
+    # command: top
+    volumes:
+      - .:/srv/django-ws
+    ports:
+      - "8000:8000"
+    environment:
+      PYTHONUNBUFFERED: 1
+      DJANGO_SETTINGS_MODULE: bk_server.settings
+
+  web-redis:
+    image: redis:6-alpine
+    container_name: web-redis
